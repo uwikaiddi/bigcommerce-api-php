@@ -25,7 +25,7 @@ http://developer.bigcommerce.com/
 - [Paging and filtering](#paging-and-filtering)
 - [Updating existing resources (PUT)](#updating-existing-resources-put)
 - [Creating new resources (POST)](#creating-new-resources-post)
-- [Deleting resources and collections (DELETE](#deleting-resources-and-collections-delete)
+- [Deleting resources and collections (DELETE)](#deleting-resources-and-collections-delete)
 - [Using the XML API](#using-the-xml-api)
 - [Handling errors and timeouts](#handling-errors-and-timeouts)
 - [Verifying SSL certificates](#verifying-ssl-certificates)
