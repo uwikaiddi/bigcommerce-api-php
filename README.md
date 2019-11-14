@@ -1,5 +1,4 @@
-Bigcommerce API Client
-======================
+# Bigcommerce API Client
 
 PHP client for connecting to the Bigcommerce V2 REST API.
 
@@ -13,8 +12,28 @@ http://developer.bigcommerce.com/
 [![Latest Stable Version](https://poser.pugx.org/bigcommerce/api/v/stable.png)](https://packagist.org/packages/bigcommerce/api)
 [![Total Downloads](https://poser.pugx.org/bigcommerce/api/downloads.png)](https://packagist.org/packages/bigcommerce/api)
 
-Requirements
-------------
+## Contents
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Namespace](#namespace)
+- [Configuration](#configuration)
+  - [Basic Auth](#basic-auth)
+  - [OAuth](#oauth)
+- [Connecting to the store](#connecting-to-the-store)
+- [Assessing collections and resources (GET)](#accessing-collections-and-resources-get)
+- [Paging and filtering](#paging-and-filtering)
+- [Updating existing resources (PUT)](#updating-existing-resources-put)
+- [Creating new resources (POST)](#creating-new-resources-post)
+- [Deleting resources and collections (DELETE)](#deleting-resources-and-collections-delete)
+- [Using the XML API](#using-the-xml-api)
+- [Handling errors and timeouts](#handling-errors-and-timeouts)
+- [Verifying SSL certificates](#verifying-ssl-certificates)
+- [Connecting thorugh a proxy server](#connecting-through-a-proxy-server)
+
+
+
+## Requirements
 
 - PHP 7.0 or greater
 - cUrl extension enabled
@@ -34,8 +53,7 @@ the 'Enable the XML API?' is ticked.
 - auth_token
 - store_hash
 
-Installation
-------------
+## Installation
 
 Use the following Composer command to install the
 API client from [the Bigcommerce vendor on Packagist](https://packagist.org/packages/bigcommerce/api):
@@ -53,8 +71,7 @@ You can also install composer for your specific project by running the following
  $ composer install
 ~~~
 
-Namespace
----------
+## Namespace
 
 All the examples below assume the `Bigcommerce\Api\Client` class is imported
 into the scope with the following namespace declaration:
@@ -63,8 +80,7 @@ into the scope with the following namespace declaration:
 use Bigcommerce\Api\Client as Bigcommerce;
 ~~~
 
-Configuration
--------------
+## Configuration
 
 To use the API client in your PHP code, ensure that you can access `Bigcommerce\Api`
 in your autoload path (using Composer’s `vendor/autoload.php` hook is recommended).
@@ -105,8 +121,7 @@ Bigcommerce::configure(array(
 
 ~~~
 
-Connecting to the store
------------------------
+## Connecting to the store
 
 To test that your configuration was correct and you can successfully connect to
 the store, ping the getTime method which will return a DateTime object
@@ -119,8 +134,7 @@ $ping = Bigcommerce::getTime();
 if ($ping) echo $ping->format('H:i:s');
 ~~~
 
-Accessing collections and resources (GET)
------------------------------------------
+## Accessing collections and resources (GET)
 
 To list all the resources in a collection:
 
@@ -149,8 +163,8 @@ $count = Bigcommerce::getProductsCount();
 
 echo $count;
 ~~~
-Paging and Filtering
---------------------
+
+## Paging and Filtering
 
 All the default collection methods support paging, by passing
 the page number to the method as an integer:
@@ -178,8 +192,7 @@ $featured = Bigcommerce::getProducts($filter);
 See the API documentation for each resource for a list of supported filter
 parameters.
 
-Updating existing resources (PUT)
----------------------------------
+## Updating existing resources (PUT)
 
 To update a single resource:
 
@@ -203,8 +216,7 @@ $fields = array(
 Bigcommerce::updateProduct(11, $fields);
 ~~~
 
-Creating new resources (POST)
------------------------------
+## Creating new resources (POST)
 
 Some resources support creation of new items by posting to the collection. This
 can be done by passing an array or stdClass object representing the new
@@ -228,8 +240,7 @@ $brand->name = "Apple";
 $brand->create();
 ~~~
 
-Deleting resources and collections (DELETE)
--------------------------------------------
+## Deleting resources and collections (DELETE)
 
 To delete a single resource you can call the delete method on the resource object:
 
@@ -251,8 +262,7 @@ deleteAll methods to do this:
 Bigcommerce::deleteAllOptionSets();
 ~~~
 
-Using The XML API
------------------
+## Using The XML API
 
 By default, the API client handles requests and responses by converting between
 JSON strings and their PHP object representations. If you need to work with XML
@@ -281,8 +291,7 @@ $xml = "<?xml version="1.0" encoding="UTF-8"?>
 $result = Bigcommerce::createBrand($xml);
 ~~~
 
-Handling Errors And Timeouts
-----------------------------
+## Handling Errors And Timeouts
 
 For whatever reason, the HTTP requests at the heart of the API may not always
 succeed.
@@ -330,8 +339,7 @@ client errors and server errors. The API documentation for response codes
 contains a list of all the possible error conditions the client may encounter.
 
 
-Verifying SSL certificates
---------------------------
+## Verifying SSL certificates
 
 By default, the client will attempt to verify the SSL certificate used by the
 Bigcommerce store. In cases where this is undesirable, or where an unsigned
@@ -342,8 +350,7 @@ switch, which will disable certificate checking on all subsequent requests:
 Bigcommerce::verifyPeer(false);
 ~~~
 
-Connecting through a proxy server
----------------------------------
+## Connecting through a proxy server
 
 In cases where you need to connect to the API through a proxy server, you may
 need to configure the client to recognize this. Provide the URL of the proxy
